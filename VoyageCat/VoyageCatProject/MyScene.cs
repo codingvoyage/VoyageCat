@@ -16,7 +16,7 @@ namespace VoyageCatProject {
 
             //Insert your code here
             var scratch = new Entity("Cat")
-                .AddComponent(new Sprite("Content/Cat.wpk"))
+                .AddComponent(new Sprite("Content/scratchcat.wpk"))
                 .AddComponent(new SpriteRenderer(DefaultLayers.Alpha))
                 .AddComponent(new Transform2D() {
                     Origin = new Vector2(0.5f, 1),
