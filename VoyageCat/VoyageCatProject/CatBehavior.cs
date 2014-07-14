@@ -13,6 +13,11 @@ namespace VoyageCatProject
 {
     class CatBehavior : Behavior
     {
+        public static const Vector2 UP = new Vector2(0, -1);
+        public static const Vector2 DOWN = new Vector2(0, 1);
+        public static const Vector2 LEFT = new Vector2(-1, 0);
+        public static const Vector2 RIGHT = new Vector2(1, 0);
+
 
         [RequiredComponent]
         public Transform2D transformation;
@@ -26,8 +31,43 @@ namespace VoyageCatProject
 
         protected override void Update(TimeSpan gameTime)
         {
-            transformation.X += 1;
-            transformation.Y += 1;
+            //Prepare for input
+            Vector2 direction = new Vector2(0, 0);
+
+            //Process input.
+            var keyboard = WaveServices.Input.KeyboardState;
+            if (keyboard.Right == ButtonState.Pressed)
+            {
+                direction += RIGHT;
+            }
+            if (keyboard.Left == ButtonState.Pressed)
+            {
+                direction += LEFT;
+            }
+            if (keyboard.Up == ButtonState.Pressed)
+            {
+                direction += UP;
+            }
+            if (keyboard.Down == ButtonState.Pressed)
+            {
+                direction += DOWN;
+            }
+
+            //Prepare target coordinate
+            Vector2.Normalize(direction);
+            int amountMoved = 2;
+            float deltaX = direction.X * amountMoved;
+            float deltaY = direction.Y * amountMoved;
+            float newX = transformation.X + deltaX;
+            float newY = transformation.Y + deltaY;
+
+            //Validate coordinate
+            if (newX > 0 && newX < WaveServices.Platform.ScreenWidth &&
+                newY > 0 && newY < WaveServices.Platform.ScreenHeight)
+            {
+                transformation.X = newX;
+                transformation.Y = newY;
+            }
         }
     }
 }
