@@ -21,7 +21,7 @@ namespace VoyageCat {
             this.Width = 800;
             this.Height = 600;
             this.FullScreen = false;
-            this.WindowTitle = "VoyageCat";
+            this.WindowTitle = "VoyageCat - Demo Project Only";
         }
 
         public override void Initialize() {

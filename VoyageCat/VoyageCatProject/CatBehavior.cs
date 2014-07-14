@@ -13,10 +13,10 @@ namespace VoyageCatProject
 {
     class CatBehavior : Behavior
     {
-        public static const Vector2 UP = new Vector2(0, -1);
-        public static const Vector2 DOWN = new Vector2(0, 1);
-        public static const Vector2 LEFT = new Vector2(-1, 0);
-        public static const Vector2 RIGHT = new Vector2(1, 0);
+        public static Vector2 UP = new Vector2(0, -1);
+        public static Vector2 DOWN = new Vector2(0, 1);
+        public static Vector2 LEFT = new Vector2(-1, 0);
+        public static Vector2 RIGHT = new Vector2(1, 0);
 
 
         [RequiredComponent]

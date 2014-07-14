@@ -14,19 +14,36 @@ namespace VoyageCatProject {
         protected override void CreateScene() {
             RenderManager.BackgroundColor = Color.CornflowerBlue;
 
-            //Insert your code here
+            // Insert scratch cat
+
+            // From the MIT Scratch Project - http://scratch.mit.edu/
+
             var scratch = new Entity("Cat")
                 .AddComponent(new Sprite("Content/scratchcat.wpk"))
                 .AddComponent(new SpriteRenderer(DefaultLayers.Alpha))
                 .AddComponent(new Transform2D()
                 {
-                    Origin = new Vector2(0.5f, 1),
+                    Origin = new Vector2(0, 1),
                     X = WaveServices.Platform.ScreenWidth / 2,
                     Y = WaveServices.Platform.ScreenHeight
                 })
                 .AddComponent(new CatBehavior());
 
             EntityManager.Add(scratch);
+
+            var bullet = new Entity("Bullet")
+                .AddComponent(new Sprite("Content/bullet.wpk"))
+                .AddComponent(new SpriteRenderer(DefaultLayers.Alpha))
+                .AddComponent(new Transform2D() {
+
+                    Origin = new Vector2(0, 1),
+                    X = WaveServices.Platform.ScreenWidth / 2,
+                    Y = WaveServices.Platform.ScreenHeight
+                });
+
+            EntityManager.Add(bullet);
+
+
             
         }
 
