@@ -18,14 +18,18 @@ namespace VoyageCatProject {
             var scratch = new Entity("Cat")
                 .AddComponent(new Sprite("Content/scratchcat.wpk"))
                 .AddComponent(new SpriteRenderer(DefaultLayers.Alpha))
-                .AddComponent(new Transform2D() {
+                .AddComponent(new Transform2D()
+                {
                     Origin = new Vector2(0.5f, 1),
                     X = WaveServices.Platform.ScreenWidth / 2,
                     Y = WaveServices.Platform.ScreenHeight
-                });
+                })
+                .AddComponent(new CatBehavior());
 
             EntityManager.Add(scratch);
             
         }
+
+        
     }
 }
