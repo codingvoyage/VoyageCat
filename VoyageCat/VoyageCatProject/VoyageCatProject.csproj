@@ -46,7 +46,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BulletBehavior.cs" />
     <Compile Include="CatBehavior.cs" />
+    <Compile Include="EntityFactory.cs" />
     <Compile Include="Game.cs" />
     <Compile Include="MyScene.cs" />
   </ItemGroup>

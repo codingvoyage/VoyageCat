@@ -8,6 +8,7 @@ using WaveEngine.Framework;
 using WaveEngine.Framework.Graphics;
 using WaveEngine.Framework.Services;
 using WaveEngine.Common.Math;
+using System.Diagnostics;
 
 namespace VoyageCatProject
 {
@@ -19,7 +20,6 @@ namespace VoyageCatProject
         public static Vector2 RIGHT = new Vector2(1, 0);
 
         [RequiredComponent]
-
         public Transform2D transformation;
 
         private class SimpleGun
@@ -38,35 +38,14 @@ namespace VoyageCatProject
             public void Fire()
             {
                 currentDelay = 0;
-
-        public Transform2D transformation;
-
-        private class SimpleGun
-        {
-            public int firingDelay;
-            public int currentDelay;
-            public SimpleGun(int firingDelay)
-            {
-                this.firingDelay = firingDelay;
-                currentDelay = firingDelay;
-            }
-            public bool CanFire()
-            {
-                return currentDelay >= firingDelay;              
-            }
-            public void Fire()
-            {
-                currentDelay = 0;
-
             }
             public void Update(TimeSpan gameTime)
             {
-                if (currentDelay < firingDelay)
-                    currentDelay += gameTime.Milliseconds;
+                Debug.Print(gameTime.Milliseconds + "");
+
+                currentDelay += gameTime.Milliseconds;
+                if (currentDelay > 2147482647) currentDelay = firingDelay;
             }
-
-        }
-
 
         }
 
@@ -76,21 +55,13 @@ namespace VoyageCatProject
         public CatBehavior()
             : base("cat")
         {
-
             this.transformation = null;
-
-            this.transformation = null;
-
             gun = new SimpleGun(800);
         }
 
         protected override void Update(TimeSpan gameTime)
         {
-
             //Update gun
-
-            //Update gun
-
             gun.Update(gameTime);
 
             //Prepare for input
@@ -119,15 +90,13 @@ namespace VoyageCatProject
                 if (gun.CanFire())
                 {
                     gun.Fire();
-                    
-                }
-            }
-            if (keyboard.Space == ButtonState.Pressed)
-            {
-                if (gun.CanFire())
-                {
-                    gun.Fire();
-                    
+                    EntityManager.Add(
+                        EntityFactory.MakeBullet(
+                        "bullet" + EntityFactory.GetUniqueID(),
+                        transformation.X,
+                        transformation.Y,
+                        UP)
+                    );
                 }
             }
 
@@ -139,28 +108,16 @@ namespace VoyageCatProject
             float newX = transformation.X + deltaX;
             float newY = transformation.Y + deltaY;
 
-
             //Validate coordinate
-            if (newX > 0 && newX < WaveServices.Platform.ScreenWidth &&
-                newY > 0 && newY < WaveServices.Platform.ScreenHeight)
+            if (newX > 0 && 
+                newX < WaveServices.Platform.ScreenWidth &&
+                newY > 0 && 
+                newY < WaveServices.Platform.ScreenHeight)
             {
                 transformation.X = newX;
                 transformation.Y = newY;
             }
 
-            if (newX < 50)
-
-            //Validate coordinate
-            if (newX > 0 && newX < WaveServices.Platform.ScreenWidth &&
-                newY > 0 && newY < WaveServices.Platform.ScreenHeight)
-            {
-                transformation.X = newX;
-                transformation.Y = newY;
-            }
-
-            if (newX < 50)
-
-                EntityManager.Remove(this.Owner);
 
         }
     }
